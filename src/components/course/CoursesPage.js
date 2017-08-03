@@ -1,5 +1,6 @@
 import React , {PropTypes} from 'react';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import * as courseActions from '../../actions/courseAction';
 
 class CoursesPage extends React.Component
@@ -28,7 +29,7 @@ class CoursesPage extends React.Component
   onClickSave()
   {
     //Dispatch an action
-    this.props.createCourse(this.state.course);
+    this.props.actions.createCourse(this.state.course);
   }
 
   courseRow(course, index)
@@ -57,11 +58,11 @@ class CoursesPage extends React.Component
 
 //When an error like this appears: 'createCourse' is missing in props validation
 CoursesPage.propTypes={
-  courses:PropTypes.array.isRequired,
-  createCourse : PropTypes.func.isRequired
+  actions:PropTypes.object.isRequired,
+  courses : PropTypes.array.isRequired
 };
 
-function mapStateToProps(state, ownProps)
+function mapStateToProps(state)
 {
   return {
     //The name the variable here comes from the name of the reducer.
@@ -74,7 +75,7 @@ function mapDispatchToProps (dispatch)
 {
   //It is important to type DISPATCH as that sets our flow with redux
   return {
-    createCourse: (course) => dispatch(courseActions.createCourse(course))
+       actions: bindActionCreators(courseActions,dispatch)
   };
 }
 
