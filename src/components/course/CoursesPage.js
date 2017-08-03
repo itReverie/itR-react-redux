@@ -5,6 +5,9 @@ import * as courseActions from '../../actions/courseAction';
 
 class CoursesPage extends React.Component
 {
+  //-------------------------------------------------------------------
+  //--------------Initialize state and call our actions to be bind-----
+  //-------------------------------------------------------------------
   constructor (props, context)
   {
 
@@ -19,7 +22,10 @@ class CoursesPage extends React.Component
 
   }
 
-  //Adding functions
+
+  //-------------------------------------------------------------------
+  //Adding child functions to be called by Render
+  //-------------------------------------------------------------------
   onTitleChange(event){
     const course=this.state.course;
     course.title = event.target.value;
@@ -37,6 +43,13 @@ class CoursesPage extends React.Component
     return <div key={index}>{course.title}</div>;
   }
 
+
+
+
+  //-------------------------------------------------------------------
+  //-Ideally we should just render a call to a presentation component
+  //-Avoid mark up in this CONTAINER COMPONENT
+  //-------------------------------------------------------------------
  render(){
    return (
      <div>
@@ -56,12 +69,21 @@ class CoursesPage extends React.Component
  }
 }
 
+
+//-------------------------------------------------------------------
+//----Prop Types validations
+//-------------------------------------------------------------------
 //When an error like this appears: 'createCourse' is missing in props validation
 CoursesPage.propTypes={
   actions:PropTypes.object.isRequired,
   courses : PropTypes.array.isRequired
 };
 
+
+
+//-------------------------------------------------------------------
+//Redux connect section
+//-------------------------------------------------------------------
 function mapStateToProps(state)
 {
   return {
@@ -78,7 +100,6 @@ function mapDispatchToProps (dispatch)
        actions: bindActionCreators(courseActions,dispatch)
   };
 }
-
 
 //This is a way to call two functions
 export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage);
