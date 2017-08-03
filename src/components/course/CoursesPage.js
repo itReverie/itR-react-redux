@@ -28,7 +28,7 @@ class CoursesPage extends React.Component
   onClickSave()
   {
     //Dispatch an action
-    this.props.dispatch(courseActions.createCourse(this.state.course));
+    this.props.createCourse(this.state.course);
   }
 
   courseRow(course, index)
@@ -55,9 +55,10 @@ class CoursesPage extends React.Component
  }
 }
 
+//When an error like this appears: 'createCourse' is missing in props validation
 CoursesPage.propTypes={
-  dispatch: PropTypes.func.isRequired,
-  courses:PropTypes.array.isRequired
+  courses:PropTypes.array.isRequired,
+  createCourse : PropTypes.func.isRequired
 };
 
 function mapStateToProps(state, ownProps)
@@ -68,9 +69,15 @@ function mapStateToProps(state, ownProps)
   };
 }
 
-//function mapDispatchToProps
-//Dispatch allows you to fire up actions and if you do not specify it, you can use it at the top as this.props.dispatch
+//Note: once we are using mapDispatchToProps we no longer need to expose dispatch
+function mapDispatchToProps (dispatch)
+{
+  //It is important to type DISPATCH as that sets our flow with redux
+  return {
+    createCourse: (course) => dispatch(courseActions.createCourse(course))
+  };
+}
 
 
 //This is a way to call two functions
-export default connect(mapStateToProps /*, mapDispatchToProps*/)(CoursesPage);
+export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage);
