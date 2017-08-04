@@ -22,3 +22,14 @@ export function loadCourses(){
     });
   };
 }
+
+
+export function onSave(text)
+{
+  return {type : types.TEXT_SAVED, text};
+}
+
+export function onChange(text)
+{
+  return {type : types.TEXT_ONCHANGED, text};
+}
