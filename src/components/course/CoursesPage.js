@@ -2,68 +2,49 @@ import React , {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as courseActions from '../../actions/courseAction';
+import CourseList from './CourseList';
+import {browserHistory} from 'react-router';
 
 class CoursesPage extends React.Component
 {
   //-------------------------------------------------------------------
   //--------------Initialize state and call our actions to be bind-----
   //-------------------------------------------------------------------
-  constructor (props, context)
-  {
-
-    //constructor that initializes the state
+  constructor (props, context) {
     super(props, context);
-    this.state = {
-                  course: { title: null}
-                 };
-    //Adding bind statements for our functions
-    this.onTitleChange = this.onTitleChange.bind(this);
-    this.onClickSave = this.onClickSave.bind(this);
-
+    this.redirectToAddCoursePage = this.redirectToAddCoursePage.bind(this);
   }
 
 
   //-------------------------------------------------------------------
   //Adding child functions to be called by Render
   //-------------------------------------------------------------------
-  onTitleChange(event){
-    const course=this.state.course;
-    course.title = event.target.value;
-    this.setState({course:course});
-  }
-
-  onClickSave()
-  {
-    //Dispatch an action
-    this.props.actions.createCourse(this.state.course);
-  }
-
-  courseRow(course, index)
-  {
+  courseRow(course, index) {
     return <div key={index}>{course.title}</div>;
   }
 
 
-
+  //A way to redirct to a page
+  redirectToAddCoursePage(){
+    browserHistory.push('/course');
+  }
 
   //-------------------------------------------------------------------
   //-Ideally we should just render a call to a presentation component
-  //-Avoid mark up in this CONTAINER COMPONENT
+  //-Avoid mark up in this CONTAINER COMPONENT.
+  //- This component ideally should not have JSX
   //-------------------------------------------------------------------
  render(){
+    const {courses} = this.props;
+
    return (
      <div>
        <h1>Courses</h1>
-       {this.props.courses.map(this.courseRow)}
-       <h2>Add Courses</h2>
-       <input
-          type="text"
-          onChange={this.onTitleChange}
-          value={this.state.course.title}/>
-       <input
-          type="submit"
-          value="Save"
-          onClick={this.onClickSave}/>
+       <input type="submit"
+              value="AddCourse"
+              className="btn btn-primary"
+              onClick={this.redirectToAddCoursePage}/>
+       <CourseList courses={courses}/>
      </div>
    );
  }
@@ -75,7 +56,7 @@ class CoursesPage extends React.Component
 //-------------------------------------------------------------------
 //When an error like this appears: 'createCourse' is missing in props validation
 CoursesPage.propTypes={
-  actions:PropTypes.object.isRequired,
+  actions : PropTypes.object.isRequired,
   courses : PropTypes.array.isRequired
 };
 
