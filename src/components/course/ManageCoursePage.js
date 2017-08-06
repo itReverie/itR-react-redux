@@ -3,14 +3,18 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as courseActions from '../../actions/courseAction';
 import CourseForm from './CourseForm';
+import toastr from 'toastr';
 
 class ManageCoursePage extends React.Component {
+
+
 
   constructor(props, context) {
     super(props, context);
     this.state ={
       course: Object.assign({},this.props.course),
-      errors: {}
+      errors: {},
+      saving: false
     };
 
     this.updateCourseState = this.updateCourseState.bind(this);
@@ -24,6 +28,10 @@ class ManageCoursePage extends React.Component {
     }
   }
 
+
+
+
+
  //TODO: Analyse a bit more
   updateCourseState(event){
     const field = event.target.name;
@@ -34,9 +42,22 @@ class ManageCoursePage extends React.Component {
 
   saveCourse(event){
     event.preventDefault();
-    this.props.actions.saveCourse(this.state.course);
+    //Helper state to show a UI to let the user know the API save function has being called
+    this.setState ({saving:true});
+    this.props.actions.saveCourse(this.state.course)
+                      .then(()=>this.redirect())
+                      .catch(error=> {toastr.error(error);
+                            this.setState({saving:false});
+                      });
+  }
+
+  redirect(){
+    //Set the local state back to false
+    this.setState ({saving:false});
+    toastr.success('Course saved');
     this.context.router.push('/courses');
   }
+
 
   render() {
     return (
@@ -46,6 +67,7 @@ class ManageCoursePage extends React.Component {
           onSave={this.saveCourse}
           course={this.state.course}
           errors={this.state.errors}
+          saving={this.state.saving}
         />
     );
   }
@@ -78,6 +100,8 @@ function getCourseById(courses, id)
   }
   return null;
 }
+
+
 function mapStateToProps(state, ownProps) {
 
   const courseId= ownProps.params.id;

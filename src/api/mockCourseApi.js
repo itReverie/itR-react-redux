@@ -68,7 +68,7 @@ class CourseApi {
     course = Object.assign({}, course); // to avoid manipulating object passed in.
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        // Simulate server-side validation
+        // Simulate SERVER SIDE VALIDATION
         const minCourseTitleLength = 1;
         if (course.title.length < minCourseTitleLength) {
           reject(`Title must be at least ${minCourseTitleLength} characters.`);
