@@ -1,6 +1,7 @@
 //File to create actions
 import * as types from './actionTypes';
 import AuthorsApi from '../api/mockAuthorApi';
+import {beginAjaxCall} from "./ajaxStatusActions";
 
 export function loadAuthorsSuccess(authors)
 {
@@ -12,6 +13,9 @@ export function loadAuthorsSuccess(authors)
 
 export function loadAuthors(){
   return function (dispatch){
+
+    //Loading dots (Async state to create a user experience)
+    dispatch(beginAjaxCall());
 
     //Here I can call an ajax API at this moment i am calling a mock API
     return AuthorsApi.getAllAuthors().then(authors => {

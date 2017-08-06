@@ -2,5 +2,6 @@
 //This is a way to visualize teh origin state in our store
 export default{
   authors: [],
-  courses: []
+  courses: [],
+  ajaxCallsInProgress:0
 }

@@ -5,6 +5,7 @@ import * as courseActions from '../../actions/courseAction';
 import CourseForm from './CourseForm';
 
 class ManageCoursePage extends React.Component {
+
   constructor(props, context) {
     super(props, context);
     this.state ={
@@ -14,6 +15,13 @@ class ManageCoursePage extends React.Component {
 
     this.updateCourseState = this.updateCourseState.bind(this);
     this.saveCourse = this.saveCourse.bind(this);
+  }
+
+  //This method it's usefulto populate when the existing course is loaded
+  componentWillReceiveProps(nextProps){
+    if(this.props.course.id != nextProps.course.id){
+      this.setState({course: Object.assign ({},nextProps.course)});
+    }
   }
 
  //TODO: Analyse a bit more
@@ -43,6 +51,10 @@ class ManageCoursePage extends React.Component {
   }
 }
 
+
+
+
+
 ManageCoursePage.propTypes = {
   course  : PropTypes.object.isRequired,
   authors : PropTypes.array.isRequired,
@@ -54,8 +66,28 @@ ManageCoursePage.contextTypes= {
   router: PropTypes.object
 }
 
-function mapStateToProps(state) {
+
+
+
+
+function getCourseById(courses, id)
+{
+  const course = courses.filter(course=> course.id ==id);
+  if(course){
+    return course[0]; // as the result of the mapper is an array, we just select the first one
+  }
+  return null;
+}
+function mapStateToProps(state, ownProps) {
+
+  const courseId= ownProps.params.id;
+
   let course = {id: '', watchHref:'',title:'',authorId:'',length:'', category:''};
+
+  if(courseId && state.courses.length >0 )
+  {
+    course = getCourseById(state.courses, courseId );
+  }
 
   //This is the place to transform data in the format we want
   const authorsFormattedForDropdown = state.authors.map(author =>{
