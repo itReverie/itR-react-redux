@@ -1,8 +1,9 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as courseActions from '../../actions/courseAction';
+import * as courseActions from '../../actions/courseActions';
 import CourseForm from './CourseForm';
+import {authorsFormattedForDropdown} from "../../selectors/selectors";
 import toastr from 'toastr';
 
 export class ManageCoursePage extends React.Component {
@@ -105,7 +106,7 @@ ManageCoursePage.propTypes = {
 //Pulling the React Router context
 ManageCoursePage.contextTypes= {
   router: PropTypes.object
-}
+};
 
 
 
@@ -132,17 +133,9 @@ function mapStateToProps(state, ownProps) {
     course = getCourseById(state.courses, courseId );
   }
 
-  //This is the place to transform data in the format we want
-  const authorsFormattedForDropdown = state.authors.map(author =>{
-        return {
-          value: author.id,
-          text:  author.firstName+' '+author.lastName
-        };
-});
-
   return {
     course: course,
-    authors: authorsFormattedForDropdown
+    authors: authorsFormattedForDropdown(state.authors)
   };
 }
 
