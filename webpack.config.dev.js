@@ -2,6 +2,7 @@ import webpack from 'webpack';
 import path from 'path';
 import eslintFormatter from 'react-dev-utils/eslintFormatter';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import autoprefixer from 'autoprefixer';
 
 // const globals = [
 //   resolve: ('./node_modules/bootstrap/dist/css/') // any NPM module
@@ -113,19 +114,29 @@ export default {
       // In production, we use a plugin to extract that CSS to a file, but
       // in development "style" loader enables hot editing of CSS.
       {
-        test: /\.css$/,
-        include: [__dirname + '/node_modules/bootstrap/dist/css/*.css', __dirname + '/src/' ],
+        test: /\.(css)$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [
             {
               loader: 'css-loader',
               options: {
-                //modules: true,
-                //localIdentName: '[name]__[local]___[hash:base64:5]'
+                importLoaders: 2,
+                sourceMap: true
               }
             },
-            'postcss-loader'
+            {
+              loader: 'postcss-loader',
+              options: {
+                sourceMap: true
+              }
+            },
+            // {
+            //   loader: 'resolve-url-loader',
+            //   options: {
+            //     keepQuery: true
+            //   }
+            // }
           ]
         })
       },
