@@ -7,10 +7,16 @@ const GLOBALS ={
   'process.env.PORT' : JSON.stringify('5000')
 };
 
+const customLoaderOptions = {
+  devServer: {
+    contentBase: path.resolve(__dirname, './dist')
+  },
+};
+
 export default {
-    debug: true,
+    //debug: true,
     devtool: 'source-map', //inline-source-map
-    noInfo: false,
+    //noInfo: false,
     entry: path.resolve(__dirname, 'src/index'),
     target: 'web',
     output: {
@@ -18,15 +24,14 @@ export default {
         publicPath: '/',            // In development there are not real physyical files. This is just to let the browser know it need sot create in memory thise files
         filename: 'bundle.js'
     },
-    devServer: {
-        contentBase: path.resolve(__dirname, './dist')
-    },
     plugins: [
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.DefinePlugin(GLOBALS),
         new ExtractTextPlugin('styles.css'),
         new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.UglifyJsPlugin()
+        new webpack.optimize.UglifyJsPlugin(),
+        new webpack.LoaderOptionsPlugin({options: customLoaderOptions})
+
     ],
     module: {
         loaders: [

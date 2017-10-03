@@ -1,11 +1,23 @@
-# Created by .ignore support plugin (hsz.mobi)
-.idea
+# Runtime data
+pids
+*.pid
+*.seed
 *.iml
-out
-gen
 .gitignore
-.idea/*.*
- /node_modules
- *.log
-node_modules/
-dist/
+
+# Dependency directories
+node_modules
+jspm_packages
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+#Webstorm
+.idea
+.DS_Store
+
+#prod build
+dist
+
