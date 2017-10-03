@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as courseActions from '../../actions/courseAction';
 import CourseForm from './CourseForm';
-//import toastr from 'toastr';
+import toastr from 'toastr';
 
 class ManageCoursePage extends React.Component {
 
@@ -47,7 +47,7 @@ class ManageCoursePage extends React.Component {
     this.props.actions.saveCourse(this.state.course)
                       .then(()=>this.redirect())
                       .catch(error=> {
-                            //toastr.error(error);
+                            toastr.error(error);
                             this.setState({saving:false});
                       });
   }
@@ -55,7 +55,7 @@ class ManageCoursePage extends React.Component {
   redirect(){
     //Set the local state back to false
     this.setState ({saving:false});
-    //toastr.success('Course saved');
+    toastr.success('Course saved');
     this.context.router.push('/courses');
   }
 

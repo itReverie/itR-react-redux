@@ -3,7 +3,9 @@ import path from 'path';
 import eslintFormatter from 'react-dev-utils/eslintFormatter';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
-
+// const globals = [
+//   resolve: ('./node_modules/bootstrap/dist/css/') // any NPM module
+// ];
 
 const customLoaderOptions = {
   devServer: {
@@ -105,15 +107,50 @@ export default {
           cacheDirectory: true,
         },
       },
+      // "postcss" loader applies autoprefixer to our CSS.
+      // "css" loader resolves paths in CSS and adds assets as dependencies.
+      // "style" loader turns CSS into JS modules that inject <style> tags.
+      // In production, we use a plugin to extract that CSS to a file, but
+      // in development "style" loader enables hot editing of CSS.
       {
-        test: /\.s?css$/,
-        include: __dirname + '/src/',
-        use: ['style-loader', 'css-loader', 'sass-loader', 'postcss-loader']
-
+        test: /\.css$/,
+        include: [__dirname + '/node_modules/bootstrap/dist/css/*.css', __dirname + '/src/' ],
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                //modules: true,
+                //localIdentName: '[name]__[local]___[hash:base64:5]'
+              }
+            },
+            'postcss-loader'
+          ]
+        })
+      },
+      {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                sourceMap: true,
+                importLoaders: 2,
+                localIdentName: '[name]__[local]___[hash:base64:5]'
+              }
+            },
+            'sass-loader'
+          ]
+        })
       },
       // ** STOP ** Are you adding a new loader?
       // Remember to add the new extension(s) to the "file" loader exclusion list.
     ],
+
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
