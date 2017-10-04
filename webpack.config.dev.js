@@ -3,10 +3,6 @@ import path from 'path';
 import eslintFormatter from 'react-dev-utils/eslintFormatter';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
-// const globals = [
-//   resolve: ('./node_modules/bootstrap/dist/css/') // any NPM module
-// ];
-
 const customLoaderOptions = {
   devServer: {
     contentBase: path.resolve(__dirname, 'src')
@@ -29,12 +25,6 @@ export default {
     filename: 'bundle.js'
   },
   module: {
-    loaders: [
-      {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file'},
-      {test: /\.(woff|woff2)$/, loader: 'url?prefix=font/&limit=5000'},
-      {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream'},
-      {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml'}
-    ],
     strictExportPresence: true,
     rules: [
       // TODO: Disable require.ensure as it's not a standard language feature.
@@ -77,6 +67,10 @@ export default {
           /\.jpe?g$/,
           /\.png$/,
           /\.scss$/,
+          /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+          /\.(woff|woff2)$/,
+          /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+          /\.svg(\?v=\d+\.\d+\.\d+)?$/
         ],
         loader: require.resolve('file-loader'),
         options: {
@@ -109,59 +103,52 @@ export default {
       },
       {
         test: /\.s?css$/,
-        include: __dirname +'/src/',
-        use: ['style-loader', 'css-loader', 'sass-loader' , 'postcss-loader']
+        include: __dirname + '/src/',
+        use: ['style-loader', 'css-loader', 'sass-loader', 'postcss-loader']
 
       },
-      // "postcss" loader applies autoprefixer to our CSS.
-      // "css" loader resolves paths in CSS and adds assets as dependencies.
-      // "style" loader turns CSS into JS modules that inject <style> tags.
-      // In production, we use a plugin to extract that CSS to a file, but
-      // in development "style" loader enables hot editing of CSS.
-      // {
-      //   test: /\.css$/,
-      //   include: [__dirname + '/node_modules/bootstrap/dist/css/*.css', __dirname + '/src/' ],
-      //   use: ExtractTextPlugin.extract({
-      //     fallback: 'style-loader',
-      //     use: [
-      //       {
-      //         loader: 'css-loader',
-      //         options: {
-      //           //modules: true,
-      //           //localIdentName: '[name]__[local]___[hash:base64:5]'
-      //         }
-      //       },
-      //       'postcss-loader'
-      //     ]
-      //   })
-      // },
-      // {
-      //   test: /\.scss$/,
-      //   use: ExtractTextPlugin.extract({
-      //     fallback: 'style-loader',
-      //     use: [
-      //       {
-      //         loader: 'css-loader',
-      //         options: {
-      //           modules: true,
-      //           sourceMap: true,
-      //           importLoaders: 2,
-      //           localIdentName: '[name]__[local]___[hash:base64:5]'
-      //         }
-      //       },
-      //       'sass-loader'
-      //     ]
-      //   })
-      // },
-      // ** STOP ** Are you adding a new loader?
-      // Remember to add the new extension(s) to the "file" loader exclusion list.
-    ],
+      {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        include: __dirname + '/node_modules/bootstrap-sass/',
+        loader: require.resolve('file-loader')
+        //loader: 'file-loader'},
+      },
+      {
+        test: /\.(woff|woff2)$/,
+        include: __dirname + '/node_modules/bootstrap-sass/',
+        loader: require.resolve('url-loader'),
+        options: {
+          limit: 5000,
+          name: 'static/media/[name].[hash:8].[ext]'
+          //?name=__media/[path][name][hash].[ext]
+          //prefix: 'font/'
+        }
+      },
+      {
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        include: __dirname + '/node_modules/bootstrap-sass/',
+        loader: require.resolve('url-loader'),
+        options: {
+          limit: 10000,
+          mimetype : 'application/octet-stream',
+        }
+      },
 
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        include: __dirname + '/node_modules/bootstrap-sass/',
+        loader: require.resolve('url-loader'),
+        options: {
+          limit: 10000,
+          mimetype : 'application/octet-stream',
+        }
+      },
+    ],
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    new ExtractTextPlugin({filename:'styles.css', allChunks: true }),
+    new ExtractTextPlugin({filename: 'styles.css', allChunks: true}),
     new webpack.LoaderOptionsPlugin({options: customLoaderOptions})
   ]
 };
