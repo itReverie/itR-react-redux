@@ -1,0 +1,10 @@
+a {
+  color: $the-red;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  color: $dark-grey;
+  text-decoration: none;
+}

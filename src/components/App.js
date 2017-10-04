@@ -4,6 +4,7 @@ import React from 'react';
 import Header from './common/Header';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import styles from './App.scss';
 
 class App extends React.Component {
   render(){
