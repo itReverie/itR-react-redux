@@ -22,7 +22,7 @@ export default {
         filename: 'bundle.js'
     },
     plugins: [
-        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.DefinePlugin(GLOBALS),
         new ExtractTextPlugin('styles.css'),
         new webpack.optimize.DedupePlugin(),
