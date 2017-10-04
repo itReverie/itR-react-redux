@@ -133,7 +133,6 @@ export default {
           mimetype : 'application/octet-stream',
         }
       },
-
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
         include: __dirname + '/node_modules/bootstrap-sass/',

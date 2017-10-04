@@ -3,7 +3,6 @@ import path from 'path';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 const GLOBALS ={
-  //'process.env.NODE_ENV' : JSON.stringify('production')
   'process.env.PORT' : JSON.stringify('5000')
 };
 
@@ -14,9 +13,7 @@ const customLoaderOptions = {
 };
 
 export default {
-    //debug: true,
     devtool: 'source-map', //inline-source-map
-    //noInfo: false,
     entry: path.resolve(__dirname, 'src/index'),
     target: 'web',
     output: {
