@@ -9,6 +9,6 @@ To run in development:  `npm start -s (optional)`
 To build the deployment package: `npm run build`
 
 
-![logic]( http://www.itreverie.com/githubimages/itR-react-redux.png)
+![logic]( http://www.itreverie.com/githubimages/itR-react-redux-v2.png)
 
 
