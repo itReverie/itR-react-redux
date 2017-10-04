@@ -84,6 +84,11 @@ export default {
           name: 'static/media/[name].[hash:8].[ext]',
         },
       },
+      {
+        test: /bootstrap.+\.(jsx|js)$/,
+        use: 'imports-loader?jQuery=jquery,$=jquery,this=>window',
+        exclude: /node_modules/
+      },
       // "url" loader works like "file" loader except that it embeds assets
       // smaller than specified limit in bytes as data URLs to avoid requests.
       // A missing `test` is equivalent to a match.
@@ -167,6 +172,11 @@ export default {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new ExtractTextPlugin({filename:'styles.css', allChunks: true }),
-    new webpack.LoaderOptionsPlugin({options: customLoaderOptions})
+    new webpack.LoaderOptionsPlugin({options: customLoaderOptions}),
+    new webpack.ProvidePlugin({
+      jQuery: 'jquery',
+      $: 'jquery',
+      jquery: 'jquery'
+    })
   ]
 };
