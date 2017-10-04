@@ -5,6 +5,9 @@ import * as courseActions from '../../actions/courseAction';
 import CourseList from './CourseList';
 import {browserHistory} from 'react-router';
 
+//import '../../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
+//import styles from '../buttons.scss';
+
 class CoursesPage extends React.Component
 {
   //-------------------------------------------------------------------

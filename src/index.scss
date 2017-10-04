@@ -1,0 +1,28 @@
+$body-bg : #f8f8f8 !default;
+$brand-primary: #008489 !default;
+
+
+$jumbotron-bg: #dcdcdc;
+$jumbotron-padding : 50px!default;
+
+$font-family-base : 'Josefin Sans', sans-serif;
+
+$table-bg : #dcdcdc;
+$table-border-color: #484848;
+
+.btn-primary{
+  margin-bottom: 25px !important;
+}
+
+h1{
+  color: #1CD5AC;
+}
+
+nav{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+$icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
+@import '~bootstrap-sass/assets/stylesheets/bootstrap';
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans');

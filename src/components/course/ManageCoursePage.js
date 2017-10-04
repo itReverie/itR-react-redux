@@ -46,7 +46,8 @@ class ManageCoursePage extends React.Component {
     this.setState ({saving:true});
     this.props.actions.saveCourse(this.state.course)
                       .then(()=>this.redirect())
-                      .catch(error=> {toastr.error(error);
+                      .catch(error=> {
+                            toastr.error(error);
                             this.setState({saving:false});
                       });
   }
@@ -86,7 +87,7 @@ ManageCoursePage.propTypes = {
 //Pulling the React Router context
 ManageCoursePage.contextTypes= {
   router: PropTypes.object
-}
+};
 
 
 
