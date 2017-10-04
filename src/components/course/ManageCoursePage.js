@@ -87,7 +87,7 @@ ManageCoursePage.propTypes = {
 //Pulling the React Router context
 ManageCoursePage.contextTypes= {
   router: PropTypes.object
-}
+};
 
 
 

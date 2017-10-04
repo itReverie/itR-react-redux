@@ -1,9 +1,8 @@
 import expect from 'expect';
 import React from 'react';
-import {mount, shallow} from 'enzyme';
-import TestUtils from 'react-addons-test-utils';
+import {mount, shallow, configure} from 'enzyme';
+//import TestUtils from 'react-addons-test-utils';
 import CourseForm from './CourseForm';
-import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 
 configure({ adapter: new Adapter() });
