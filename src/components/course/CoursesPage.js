@@ -4,7 +4,9 @@ import {bindActionCreators} from 'redux';
 import * as courseActions from '../../actions/courseAction';
 import CourseList from './CourseList';
 import {browserHistory} from 'react-router';
-import styles from '../buttons.scss';
+
+//import '../../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
+//import styles from '../buttons.scss';
 
 class CoursesPage extends React.Component
 {
@@ -43,7 +45,7 @@ class CoursesPage extends React.Component
        <h1>Courses</h1>
        <input type="submit"
               value="AddCourse"
-              className={styles.button}
+              className="btn btn-primary"
               onClick={this.redirectToAddCoursePage}/>
        <CourseList courses={courses}/>
      </div>
