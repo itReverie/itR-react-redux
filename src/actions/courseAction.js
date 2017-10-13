@@ -4,17 +4,17 @@ import courseApi from '../api/mockCourseApi';
 import {beginAjaxCall,ajaxCallError} from "./ajaxStatusActions";
 
 
-export function loadCoursesSuccess(course)
+function loadCoursesSuccess(course)
 {
   // we can return as many properties as I want, in this case its just Course
   return {type : types.LOAD_COURSES_SUCCESS, course};
 }
-export function createCourseSuccess(course)
+function createCourseSuccess(course)
 {
   return {type : types.CREATE_COURSE_SUCCESS, course};
 }
 
-export function updateCourseSuccess(course)
+function updateCourseSuccess(course)
 {
   return {type : types.UPDATE_COURSE_SUCCESS, course};
 }
