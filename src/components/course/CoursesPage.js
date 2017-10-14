@@ -1,9 +1,10 @@
-import React , {PropTypes} from 'react';
+import React  from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as courseActions from '../../actions/courseAction';
 import CourseList from './CourseList';
 import {browserHistory} from 'react-router';
+import PropTypes from 'prop-types';
 
 //import '../../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
 //import styles from '../buttons.scss';

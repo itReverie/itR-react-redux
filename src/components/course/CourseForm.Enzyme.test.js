@@ -3,7 +3,7 @@ import React from 'react';
 import {mount, shallow, configure} from 'enzyme';
 //import TestUtils from 'react-addons-test-utils';
 import CourseForm from './CourseForm';
-import Adapter from 'enzyme-adapter-react-15';
+import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
 

@@ -1,9 +1,10 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as courseActions from '../../actions/courseAction';
 import CourseForm from './CourseForm';
 import toastr from 'toastr';
+import PropTypes from 'prop-types';
 
 class ManageCoursePage extends React.Component {
 
