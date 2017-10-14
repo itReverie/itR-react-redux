@@ -3,7 +3,7 @@ import * as types from './actionTypes';
 import AuthorsApi from '../api/mockAuthorApi';
 import {beginAjaxCall} from "./ajaxStatusActions";
 
-export function loadAuthorsSuccess(authors)
+function loadAuthorsSuccess(authors)
 {
   //Creating an action that has a type and an object
   // we can return as many properties as I want, in this case its just Course

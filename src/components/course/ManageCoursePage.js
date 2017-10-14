@@ -6,13 +6,22 @@ import CourseForm from './CourseForm';
 import toastr from 'toastr';
 import PropTypes from 'prop-types';
 
+
+//Converting a function component into a class allow us to have additional features like:
+//local state and lifecycle hooks.
 class ManageCoursePage extends React.Component {
 
 
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      course: Object.assign({}, this.props.course),
+  constructor(props) {
+
+    // we should always pass props to the base constructor to initialize the state
+    super(props);
+
+
+    //Once we initialize the state we can add as many more properties as we want.
+    //This are the properties that might change state
+    this.state ={
+      course: Object.assign({},this.props.course),
       errors: {},
       saving: false
     };
@@ -25,6 +34,7 @@ class ManageCoursePage extends React.Component {
   }
 
 
+
   //This method it's usefulto populate when the existing course is loaded
   componentWillReceiveProps(nextProps) {
     if (this.props.course.id != nextProps.course.id) {
@@ -33,9 +43,10 @@ class ManageCoursePage extends React.Component {
   }
 
 
-  updateCourseState(event) {
-    const field = event.target.name;
-    let course = Object.assign({}, this.state.course);
+ //TODO: Analyse a bit more
+  updateCourseState(event){
+    const field = event.target.name; //this is the event on change of each field. For example: Title, Lenght, etc
+    let course = Object.assign({},this.state.course);
     course[field] = event.target.value;
     return this.setState({course: course});
   }
@@ -56,6 +67,9 @@ class ManageCoursePage extends React.Component {
     //Set the local state back to false
     this.setState({saving: false});
     toastr.success('Course saved');
+
+    //Ideally we shouldn't be using context as it is adviseable to use props and the state.
+    //Moreover, with redux we can do most of this stuff. We will leave this context just as an example of how to use it.
     this.context.router.push('/courses');
   }
 
@@ -75,6 +89,8 @@ class ManageCoursePage extends React.Component {
 }
 
 
+//This properties might not be exactly what we set in our state.
+//This are the properties that we need for the page to render
 ManageCoursePage.propTypes = {
   course: PropTypes.object.isRequired,
   authors: PropTypes.array.isRequired,
@@ -96,11 +112,15 @@ function getCourseById(courses, id) {
 }
 
 
+//We are adding ownProps as an extra parameter (in this case id via the URL) just because we need that parameter to process some information.
+//However, ownProps is optional.
 function mapStateToProps(state, ownProps) {
 
-  const courseId = ownProps.params.id;
+  //We are using the curse id to load (prepopulate) the information of that course in the form
+  const courseId= ownProps.params.id;
 
-  let course = {id: '', watchHref: '', title: '', authorId: '', length: '', category: ''};
+  //Otherwise we just load the course empty so the user adds a new course
+  let course = {id: '', watchHref:'',title:'',authorId:'',length:'', category:''};
 
   if (courseId && state.courses.length > 0) {
     course = getCourseById(state.courses, courseId);

@@ -14,8 +14,8 @@ class CoursesPage extends React.Component
   //-------------------------------------------------------------------
   //--------------Initialize state and call our actions to be bind-----
   //-------------------------------------------------------------------
-  constructor (props, context) {
-    super(props, context);
+  constructor (props) {
+    super(props);
     this.redirectToAddCoursePage = this.redirectToAddCoursePage.bind(this);
   }
 
