@@ -1,5 +1,6 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 import CourseListRow from './CourseListRow';
+import PropTypes from 'prop-types';
 
 const CourseList = ({courses}) => {
   return (
