@@ -4,7 +4,9 @@ import eslintFormatter from 'react-dev-utils/eslintFormatter';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 const GLOBALS ={
-  'process.env.PORT' : JSON.stringify('5000')
+  'process.env.NODE_ENV': JSON.stringify('production'),
+  'process.env.PORT' : JSON.stringify('5000'),
+  __DEV__: false
 };
 
 const customLoaderOptions = {
@@ -27,7 +29,22 @@ export default {
         new webpack.DefinePlugin(GLOBALS),
         new ExtractTextPlugin('styles.css'),
         new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.UglifyJsPlugin(),
+        new webpack.optimize.UglifyJsPlugin({ sourceMap: true,
+          compress: {
+            warnings: false,
+            screw_ie8: true,
+            conditionals: true,
+            unused: true,
+            comparisons: true,
+            sequences: true,
+            dead_code: true,
+            evaluate: true,
+            join_vars: true,
+            if_return: true
+          },
+          output: {
+            comments: false
+          }}),
         new webpack.LoaderOptionsPlugin({options: customLoaderOptions})
 
     ],
