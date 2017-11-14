@@ -18,6 +18,5 @@ npm-debug.log*
 .idea
 .DS_Store
 
-#prod build
-dist
+
 

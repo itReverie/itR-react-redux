@@ -6,9 +6,9 @@ import compression from 'compression';
 /*eslint-disable no-console */
 
 const port = process.env.PORT || 5000;
-//app.set('port', (process.env.PORT || 5000));
-const app = express();
 
+const app = express();
+app.set('port', (process.env.PORT || 5000));
 app.use(compression());
 app.use(express.static('dist'));
 
@@ -21,6 +21,6 @@ app.listen(port, function(err) {
   if (err) {
     console.log(err);
   } else {
-    open(`http://localhost:${port}`);
+    open(`http://${process.env.HOST}:${port}`);
   }
 });
