@@ -23,17 +23,18 @@ store.dispatch(loadCourses());
 store.dispatch(loadAuthors());
 
 //--Uncomment this section to evaluate performance-----
-// const registerObserver = require("react-perf-devtool")
+//set "no-console": 0,   in eslint to get more information
+// const registerObserver = require("react-perf-devtool");
 // const options = {
 //   shouldLog: true,
 //   port: 5000 // Port to which measures are to be logged
-// }
+// };
 //
 // function callback(measures) {
 //   // do something with these measures. Send to Googel Analytics Dashboard for further analysis ??
 //   console.table(measures);
 // }
-// registerObserver(options, callback)
+// registerObserver(options, callback);
 
 
 //The provider should wrap the complete application so it can connect it to our Redux store
