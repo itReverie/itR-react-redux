@@ -82,10 +82,11 @@
     "webpack-manifest-plugin": "^1.1.0"
   },
   "devDependencies": {
+    "enzyme": "^3.1.1",
+    "enzyme-adapter-react-16": "^1.0.4",
     "mocha": "3.5.3",
     "nock": "9.0.22",
-    "enzyme": "^3.1.1",
-    "enzyme-adapter-react-16": "^1.0.4"
+    "react-perf-devtool": "^3.0.2"
   },
   "repository": {
     "type": "git",

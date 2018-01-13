@@ -8,6 +8,7 @@ import routes from './routes';
 import {loadCourses} from './actions/courseAction';
 import {loadAuthors} from "./actions/authorActions";
 
+
 import './index.scss'; // Webpack can import CSS files just as it does javascripts so we do all those references in one file rather than having styles in the html and js in this file
 //import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 //import '../node_modules/toastr/build/toastr.min.css'
@@ -20,6 +21,20 @@ const store=configureStore();
 //Dispatch Actions
 store.dispatch(loadCourses());
 store.dispatch(loadAuthors());
+
+//--Uncomment this section to evaluate performance-----
+// const registerObserver = require("react-perf-devtool")
+// const options = {
+//   shouldLog: true,
+//   port: 5000 // Port to which measures are to be logged
+// }
+//
+// function callback(measures) {
+//   // do something with these measures. Send to Googel Analytics Dashboard for further analysis ??
+//   console.log(measures);
+// }
+// registerObserver(options, callback)
+
 
 //The provider should wrap the complete application so it can connect it to our Redux store
 //The provider connects with react-redux
