@@ -31,7 +31,7 @@ store.dispatch(loadAuthors());
 //
 // function callback(measures) {
 //   // do something with these measures. Send to Googel Analytics Dashboard for further analysis ??
-//   console.log(measures);
+//   console.table(measures);
 // }
 // registerObserver(options, callback)
 
